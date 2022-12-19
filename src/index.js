@@ -41,6 +41,45 @@ function dateTime() {
 }
 dateTime();
 
+function forecast(response) {
+  let forecastData = response.data.daily;
+  console.log(forecastData);
+  let forcastElement = document.querySelector("#forecast");
+  let day = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri"];
+
+  let forecastHTML = `<div class="row">`;
+
+  forecastData.forEach(function (forcastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col-2">
+              <ul class="weather">
+                <li>${formatDay(forcastDay.dt)}</li> 
+                <li><img
+          src="http://openweathermap.org/img/wn/${
+            forcastDay.weather[0].icon
+          }.png"
+          alt=""/></li>
+                <li><span >${Math.round(
+                  forcastDay.temp.max
+                )}° </span> <span>${Math.round(
+          forcastDay.temp.min
+        )}°</span></li> 
+              </ul>
+            </div>`;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forcastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "0fe8a8c3e267816d7e1a6e4de374af4d";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+}
+
 function cityName(event) {
   event.preventDefault();
   let cityDisplay = document.querySelector("#city-input");
@@ -99,3 +138,38 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+function searchCity(city) {
+  let apiKey = "0fe8a8c3e267816d7e1a6e4de374af4d";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(locationWeather);
+}
+function search(event) {
+  event.preventDefault();
+  let city = document.querySelector("#city-input").value;
+  searchCity(city);
+}
+
+function showFrankfurt(event) {
+  event.preventDefault();
+  searchCity("Frankfurt");
+}
+
+function showKyiv(event) {
+  event.preventDefault();
+  searchCity("Kyiv");
+}
+
+function showParis(event) {
+  event.preventDefault();
+  searchCity("Paris");
+}
+
+let frankfurtButton = document.querySelector("#frankfurt-button");
+frankfurtButton.addEventListener("click", showFrankfurt);
+
+let kyivButton = document.querySelector("#kyiv-button");
+kyivButton.addEventListener("click", showKyiv);
+
+let parisButton = document.querySelector("#paris-button");
+parisButton.addEventListener("click", showParis);

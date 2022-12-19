@@ -24,15 +24,21 @@
       <div class="weather-app">
         <div class="row">
           <div class="col-6" style="width: 10rem">
-            <button type="button" class="btn btn-light">Today</button>
+            <button type="button" class="btn btn-light" id="frankfurt-button">
+              Frankfurt
+            </button>
+          </div>
+
+          <div class="col-6" style="width: 8rem">
+            <button type="button" class="btn btn-light" id="kyiv-button">
+              Kyiv
+            </button>
           </div>
 
           <div class="col-6" style="width: 10rem">
-            <button type="button" class="btn btn-light">Week</button>
-          </div>
-
-          <div class="col-6" style="width: 10rem">
-            <button type="button" class="btn btn-light">14 days</button>
+            <button type="button" class="btn btn-light" id="paris-button">
+              Paris
+            </button>
           </div>
         </div>
       </div>
@@ -82,37 +88,8 @@
 
         <a href="#" id="fahrenheit-link" class="units">°F</a>
       </h2>
-      <div class="row">
-        <div class="card" style="width: 7rem">
-          Sunday <br />
-          🌤 <br />
-          17℃
-        </div>
 
-        <div class="card" style="width: 7rem">
-          Monday <br />
-          ☀️ <br />
-          19℃
-        </div>
-
-        <div class="card" style="width: 7rem">
-          Tuesday <br />
-          🌧 <br />
-          17℃
-        </div>
-
-        <div class="card" style="width: 7rem">
-          Wednesday <br />
-          ☁️ <br />
-          18℃
-        </div>
-
-        <div class="card" style="width: 7rem">
-          Thuesday <br />
-          ☀️ <br />
-          20℃
-        </div>
-      </div>
+      <div class="weather-forecast" id="forecast"></div>
     </div>
     <div class="source-code">
       <a
