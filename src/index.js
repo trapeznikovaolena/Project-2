@@ -41,6 +41,14 @@ function dateTime() {
 }
 dateTime();
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -53,7 +61,9 @@ function displayForecast(response) {
         forecastHTML +
         `
       <div class="col-2" id="daysForecast">
-        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <div class="weather-forecast-date">${formatDay(
+          forecastDay.dt * 1000
+        )}</div>
         <img
           src="http://openweathermap.org/img/wn/${
             forecastDay.weather[0].icon
@@ -121,6 +131,7 @@ function locationWeather(response) {
   celsiusTemperature = response.data.main.temp;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  getForecast(response.data.coord);
 }
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
