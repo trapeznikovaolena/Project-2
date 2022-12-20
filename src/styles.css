@@ -112,3 +112,6 @@ p {
   font-size: 12px;
   padding-left: 220px;
 }
+.weather-forecast-temperature-min {
+  font-weight: 60;
+}
